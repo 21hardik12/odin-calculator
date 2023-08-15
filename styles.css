@@ -1,0 +1,67 @@
+.content {
+    box-sizing: border-box;
+    width: 430px;
+    height: 550px;
+    margin: 50px auto;
+    border: 10px solid #2f2f2f;
+    background-color: black;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.display {
+    position: absolute;
+    box-sizing: border-box;
+    height: 20%;
+    width: 100%;
+    background-color: #b2b9b7;
+}
+
+.pad {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: row;
+}
+
+.functions {
+    width: 80%;
+    height: 20%;
+    display: flex;
+    flex-direction: row;    
+}
+
+.function {
+    height: 80px;
+    width: 33.33%;
+    background-color: #1e90ff;
+}
+
+.numerical .row {
+    width: 80%;
+    height: 20%;
+    display: flex;
+    flex-direction: row;    
+    flex-wrap: nowrap;
+}
+
+.numeric {
+    width: 20%;
+    height: 16%;
+    background-color: #217c7e;
+}
+
+.operators {
+    width: 20%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;    
+}
+
+.operator {
+    width: 100%;    
+    height: 20%;
+    background-color: #ff8f1f;
+}

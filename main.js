@@ -1,7 +1,7 @@
 let operand1 = "";
 let operand2 = "";
 let operator = "";
-let displayValue = "";
+let isOperand1OnDisplay = true;
 
 const operatorKeys = document.querySelectorAll(".okey");
 operatorKeys.forEach((key) => {
@@ -24,12 +24,24 @@ operatorKeys.forEach((key) => {
     });
 });
 
+const backspaceKey = document.getElementById('key-backspace');
+console.log(backspaceKey);
+backspaceKey.addEventListener('click', e => {
+    if (isOperand1OnDisplay) {
+        operand1 = operand1.slice(0, -1);        
+        setDisplayValue(operand1);
+    } else {
+        operand2 = operand2.slice(0, -1);        
+        setDisplayValue(operand2);
+    }
+});
+
 const acKey = document.getElementById('key-ac');
 acKey.addEventListener('click', e => {
     operand1 = "";
     operand2 = "";
     operator = "";
-    setDisplayValue('0');
+    setDisplayValue('');
     document.querySelectorAll(".okey").forEach((k) => {
         if (k.classList.contains('operator-enabled')) {                    
             k.classList.remove("operator-enabled");
@@ -48,9 +60,11 @@ numericKeys.forEach((key) => {
     key.addEventListener("click", (e) => {
         if (!operator) {
             operand1 += key.value;
+            isOperand1OnDisplay = true;
             setDisplayValue(operand1);
         } else {
             operand2 += key.value;
+            isOperand1OnDisplay = false;
             setDisplayValue(operand2);
         }
     });
@@ -62,6 +76,7 @@ function compute(value) {
             if (!operand2) break;
             operand1 = `${parseInt(operand1) + parseInt(operand2)}`;
             operand2 = '';
+            isOperand1OnDisplay = true;
             setDisplayValue(operand1);
             console.log(`operand1:${operand1} operand2:${operand2}`);
             break;
@@ -69,6 +84,7 @@ function compute(value) {
             if (!operand2) break;
             operand1 = `${parseInt(operand1) - parseInt(operand2)}`;
             operand2 = '';
+            isOperand1OnDisplay = true;
             setDisplayValue(operand1);
             console.log(`operand1:${operand1} operand2:${operand2}`);
             break;
@@ -76,17 +92,21 @@ function compute(value) {
             if (!operand2) break;
             operand1 = `${parseInt(operand1) * parseInt(operand2)}`;
             operand2 = '';
+            isOperand1OnDisplay = true;
             setDisplayValue(operand1);
             console.log(`operand1:${operand1} operand2:${operand2}`);
             break;
         case "/":
             if (operand2 == '0') {
-                setDisplayValue('lol');
+                operand1 = 'lol';
+                isOperand1OnDisplay = true;
+                setDisplayValue(operand1);
                 break;
             }
             if (!operand2) break;
             operand1 = `${parseInt(operand1) / parseInt(operand2)}`;
             operand2 = '';
+            isOperand1OnDisplay = true;
             setDisplayValue(operand1);
             console.log(`operand1:${operand1} operand2:${operand2}`);
             break;
@@ -96,6 +116,7 @@ function compute(value) {
 }
 
 function setDisplayValue(value) {    
+    if(!value) value = '0';
     const event = new CustomEvent('displayUpdate', {detail: value});
     window.dispatchEvent(event);
 }

@@ -37,6 +37,11 @@
     gap: 2px 2px;    
 }
 
+.okey,
+#key-equals {
+    background-color: lightslategray;
+}
+
 .key {    
     user-select: none;
     -webkit-user-drag: none;

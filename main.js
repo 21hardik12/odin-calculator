@@ -24,8 +24,12 @@ operatorKeys.forEach((key) => {
     });
 });
 
+const percentKey = document.getElementById('key-percentage');
+percentKey.addEventListener('click', e => {
+    if (operand1 != '') compute('%');
+});
+
 const backspaceKey = document.getElementById('key-backspace');
-console.log(backspaceKey);
 backspaceKey.addEventListener('click', e => {
     if (isOperand1OnDisplay) {
         operand1 = operand1.slice(0, -1);        
@@ -86,7 +90,7 @@ dotKey.addEventListener('click', e => {
 });
 
 function compute(value) {
-    if (!operand2) return;
+    if (!operand2 && value != '%') return;
 
     switch (value) {
         case "+":
@@ -119,14 +123,16 @@ function compute(value) {
             else 
                 operand1 = `${parseFloat(operand1) / parseFloat(operand2)}`;
             break;
+        case '%': 
+            operand1 = `${parseInt(operand1) / 100}`;
+            break;
         case '':
             break;
     }
 
     operand2 = '';    
     isOperand1OnDisplay = true;
-    setDisplayValue(operand1);
-    console.log(`operand1:${operand1} operand2:${operand2}`);
+    setDisplayValue(operand1);    
 }
 
 function setDisplayValue(value) {    

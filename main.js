@@ -6,21 +6,19 @@ let displayValue = "";
 const operatorKeys = document.querySelectorAll(".okey");
 operatorKeys.forEach((key) => {
     key.addEventListener("click", (e) => {
-        if (key.classList.contains("operator-enabled")) {
+        if (key.classList.contains("operator-enabled")) {            
             compute(key.value);
             key.classList.remove("operator-enabled");
-            operator = "";
+            operator = "";            
             return;
         }
 
-        document
-            .querySelectorAll(".okey")
-            .forEach((k) => {
-                if (k.classList.contains('operator-enabled')) {
-                    compute(k.value);
-                    k.classList.remove("operator-enabled")
-                }
-            });
+        document.querySelectorAll(".okey").forEach((k) => {
+            if (k.classList.contains('operator-enabled')) {
+                compute(k.value);
+                k.classList.remove("operator-enabled");
+            }            
+        });
         key.classList.add("operator-enabled");
         operator = key.value;
     });
@@ -28,10 +26,15 @@ operatorKeys.forEach((key) => {
 
 const acKey = document.getElementById('key-ac');
 acKey.addEventListener('click', e => {
-    operand1 = '';
-    operand2 = '';
+    operand1 = "";
+    operand2 = "";
+    operator = "";
     setDisplayValue('0');
-    document.querySelectorAll('okey').forEach(k => k.classList.remove('operator-enabled'));
+    document.querySelectorAll(".okey").forEach((k) => {
+        if (k.classList.contains('operator-enabled')) {                    
+            k.classList.remove("operator-enabled");
+        }
+    });
 });
 
 const equalsKey = document.getElementById('key-equals');
@@ -46,8 +49,7 @@ numericKeys.forEach((key) => {
         if (!operator) {
             operand1 += key.value;
             setDisplayValue(operand1);
-        }
-        else {
+        } else {
             operand2 += key.value;
             setDisplayValue(operand2);
         }
@@ -57,24 +59,32 @@ numericKeys.forEach((key) => {
 function compute(value) {
     switch (value) {
         case "+":
+            if (!operand2) break;
             operand1 = `${parseInt(operand1) + parseInt(operand2)}`;
             operand2 = '';
             setDisplayValue(operand1);
             console.log(`operand1:${operand1} operand2:${operand2}`);
             break;
         case "-":
+            if (!operand2) break;
             operand1 = `${parseInt(operand1) - parseInt(operand2)}`;
             operand2 = '';
             setDisplayValue(operand1);
             console.log(`operand1:${operand1} operand2:${operand2}`);
             break;
         case "*":
+            if (!operand2) break;
             operand1 = `${parseInt(operand1) * parseInt(operand2)}`;
             operand2 = '';
             setDisplayValue(operand1);
             console.log(`operand1:${operand1} operand2:${operand2}`);
             break;
         case "/":
+            if (operand2 == '0') {
+                setDisplayValue('lol');
+                break;
+            }
+            if (!operand2) break;
             operand1 = `${parseInt(operand1) / parseInt(operand2)}`;
             operand2 = '';
             setDisplayValue(operand1);

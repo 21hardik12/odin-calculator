@@ -53,7 +53,8 @@
     background-color: #2f2f2f;
 }
 
-.nkey {
+.nkey,
+#key-dot {
     background-color: #b2b9b7;
 }
 

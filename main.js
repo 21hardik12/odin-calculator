@@ -72,31 +72,40 @@ numericKeys.forEach((key) => {
     });
 });
 
+const dotKey = document.getElementById('key-dot');
+dotKey.addEventListener('click', e => {
+    if (isOperand1OnDisplay) {
+        if (operand1.includes('.')) return;
+        operand1 += '.';
+        setDisplayValue(operand1);
+    } else {
+        if (operand2.includes('.')) return;
+        operand2 += '.';
+        setDisplayValue(operand2);
+    }
+});
+
 function compute(value) {
+    if (!operand2) return;
+
     switch (value) {
         case "+":
-            if (!operand2) break;
-            operand1 = `${parseInt(operand1) + parseInt(operand2)}`;
-            operand2 = '';
-            isOperand1OnDisplay = true;
-            setDisplayValue(operand1);
-            console.log(`operand1:${operand1} operand2:${operand2}`);
+            if (!operand1.includes('.') || operand2.includes('.'))
+                operand1 = `${parseInt(operand1) + parseInt(operand2)}`;            
+            else 
+                operand1 = `${parseFloat(operand1) + parseFloat(operand2)}`;
             break;
         case "-":
-            if (!operand2) break;
-            operand1 = `${parseInt(operand1) - parseInt(operand2)}`;
-            operand2 = '';
-            isOperand1OnDisplay = true;
-            setDisplayValue(operand1);
-            console.log(`operand1:${operand1} operand2:${operand2}`);
+            if (!operand1.includes('.') || operand2.includes('.'))
+                operand1 = `${parseInt(operand1) - parseInt(operand2)}`;            
+            else 
+                operand1 = `${parseFloat(operand1) - parseFloat(operand2)}`;
             break;
         case "*":
-            if (!operand2) break;
-            operand1 = `${parseInt(operand1) * parseInt(operand2)}`;
-            operand2 = '';
-            isOperand1OnDisplay = true;
-            setDisplayValue(operand1);
-            console.log(`operand1:${operand1} operand2:${operand2}`);
+            if (!operand1.includes('.') || operand2.includes('.'))
+                operand1 = `${parseInt(operand1) * parseInt(operand2)}`;            
+            else 
+                operand1 = `${parseFloat(operand1) * parseFloat(operand2)}`;
             break;
         case "/":
             if (operand2 == '0') {
@@ -105,16 +114,19 @@ function compute(value) {
                 setDisplayValue(operand1);
                 break;
             }
-            if (!operand2) break;
-            operand1 = `${parseInt(operand1) / parseInt(operand2)}`;
-            operand2 = '';
-            isOperand1OnDisplay = true;
-            setDisplayValue(operand1);
-            console.log(`operand1:${operand1} operand2:${operand2}`);
+            if (!operand1.includes('.') || operand2.includes('.'))
+                operand1 = `${parseInt(operand1) / parseInt(operand2)}`;            
+            else 
+                operand1 = `${parseFloat(operand1) / parseFloat(operand2)}`;
             break;
         case '':
             break;
     }
+
+    operand2 = '';    
+    isOperand1OnDisplay = true;
+    setDisplayValue(operand1);
+    console.log(`operand1:${operand1} operand2:${operand2}`);
 }
 
 function setDisplayValue(value) {    

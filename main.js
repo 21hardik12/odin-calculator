@@ -59,11 +59,13 @@ const numericKeys = document.querySelectorAll(".nkey");
 numericKeys.forEach((key) => {
     key.addEventListener("click", (e) => {
         if (!operator) {
-            operand1 += key.value;
+            if (operand1.length <= 10)
+                operand1 += key.value;
             isOperand1OnDisplay = true;
             setDisplayValue(operand1);
         } else {
-            operand2 += key.value;
+            if (operand2.length <= 10)
+                operand2 += key.value;
             isOperand1OnDisplay = false;
             setDisplayValue(operand2);
         }
@@ -117,6 +119,7 @@ function compute(value) {
 
 function setDisplayValue(value) {    
     if(!value) value = '0';
+    if (value.length > 11) value = value.substring(0, 7) + value.slice(-4);
     const event = new CustomEvent('displayUpdate', {detail: value});
     window.dispatchEvent(event);
 }

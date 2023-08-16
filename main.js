@@ -35,8 +35,14 @@ equalsKey.addEventListener('click', e => {
 const numericKeys = document.querySelectorAll(".nkey");
 numericKeys.forEach((key) => {
     key.addEventListener("click", (e) => {
-        if (!operator) operand1 += key.value;
-        else operand2 += key.value;
+        if (!operator) {
+            operand1 += key.value;
+            setDisplayValue(operand1);
+        }
+        else {
+            operand2 += key.value;
+            setDisplayValue(operand2);
+        }
     });
 });
 
@@ -45,26 +51,40 @@ function compute(value) {
         case "+":
             operand1 = `${parseInt(operand1) + parseInt(operand2)}`;
             operand2 = '';
+            setDisplayValue(operand1);
             console.log(`operand1:${operand1} operand2:${operand2}`);
             break;
         case "-":
             operand1 = `${parseInt(operand1) - parseInt(operand2)}`;
             operand2 = '';
+            setDisplayValue(operand1);
             console.log(`operand1:${operand1} operand2:${operand2}`);
             break;
         case "*":
             operand1 = `${parseInt(operand1) * parseInt(operand2)}`;
             operand2 = '';
+            setDisplayValue(operand1);
             console.log(`operand1:${operand1} operand2:${operand2}`);
             break;
         case "/":
             operand1 = `${parseInt(operand1) / parseInt(operand2)}`;
             operand2 = '';
+            setDisplayValue(operand1);
             console.log(`operand1:${operand1} operand2:${operand2}`);
             break;
         case '':
             break;
     }
 }
+
+function setDisplayValue(value) {    
+    const event = new CustomEvent('displayUpdate', {detail: value});
+    window.dispatchEvent(event);
+}
+
+window.addEventListener('displayUpdate', e => {
+    const display = document.querySelector('.display p');
+    display.textContent = e.detail;
+});
 
 

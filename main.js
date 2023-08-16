@@ -26,6 +26,14 @@ operatorKeys.forEach((key) => {
     });
 });
 
+const acKey = document.getElementById('key-ac');
+acKey.addEventListener('click', e => {
+    operand1 = '';
+    operand2 = '';
+    setDisplayValue('0');
+    document.querySelectorAll('okey').forEach(k => k.classList.remove('operator-enabled'));
+});
+
 const equalsKey = document.getElementById('key-equals');
 equalsKey.addEventListener('click', e => {
     compute(operator);

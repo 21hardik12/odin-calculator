@@ -24,7 +24,7 @@ operatorKeys.forEach((key) => {
     });
 });
 
-const percentKey = document.getElementById('key-percentage');
+const percentKey = document.getElementById('key-%');
 percentKey.addEventListener('click', e => {
     if (operand1 != '') compute('%');
 });
@@ -131,6 +131,7 @@ function compute(value) {
     }
 
     operand2 = '';    
+    operator = '';
     isOperand1OnDisplay = true;
     setDisplayValue(operand1);    
 }
@@ -147,4 +148,24 @@ window.addEventListener('displayUpdate', e => {
     display.textContent = e.detail;
 });
 
+document.addEventListener('keydown', e => {
+    console.log(e.key.toLowerCase());
+
+    if (e.key.toLowerCase() == 'enter') {
+        equalsKey.click();
+        return;
+    }
+    if (e.key.toLowerCase() == '.') {
+        dotKey.click();
+        return;
+    }
+
+    if (e.key.toLowerCase() == 'backspace') {
+        backspaceKey.click();
+        return;
+    }
+
+    const button = document.getElementById(`key-${e.key.toLowerCase()}`);
+    if (button) button.click();
+});
 

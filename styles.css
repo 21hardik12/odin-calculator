@@ -3,75 +3,50 @@
     width: 430px;
     height: 550px;
     margin: 50px auto;
-    border: 10px solid #2f2f2f;    
-    padding: 5px;    
+    border: 10px solid #2f2f2f;        
+    background-color: black;    
     display: flex;
     flex-direction: column;
-    background-color: black;
+    gap: 2px;
 }
 
-.display {
+.display {    
+    height: 20%;    
+    margin: 5px;
     background-color: #b2b9b7;    
-    flex: 2;
-}
-
-.pad {    
+    flex: auto; 
     display: flex;
-    flex-direction: row;   
-    flex: 7;
-    
+    align-items: center;
+    justify-content: right;
 }
 
-.functions-and-numericals {    
-        
-    flex: 3;
-    display: flex;
-    flex-direction: column;
+.display p {
+    font-size: 70px;
 }
 
-.functions {        
-    flex: 1;
-    display: flex;
-    
-    flex-direction: row;
+.pad {   
+    height: 80%;
+    margin: -3px 5px 5px 5px;
+    flex: auto;  
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 2px 2px;    
 }
 
-.fbutton {
-    background-color: #1e90ff;
-    flex: 1;
+.key {    
+    font-size: 20px;
+    font-weight: bold;
 }
 
-.numericals {    
-    display: flex;
-    flex-direction: column;
-    flex: 4;
-    
+.fkey {
+    background-color: #2f2f2f;
 }
 
-.numeric-row {
-    display: flex;
-    flex-direction: row;
-    
-    flex: 1;    
-}
-
-.numericals:first-child:first-child{
+.nkey {
     background-color: #b2b9b7;
 }
 
-.nbutton {
-    flex: 1;
-    background-color: #217c7e;
-}
-
-.operators {
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-    flex: 1;    
-}
-
-.obutton {
-    flex: 1;
-    background-color: #ff8f1f;
+#key-0 {
+    grid-column: span 2;
 }
